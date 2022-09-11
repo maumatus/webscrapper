@@ -12,7 +12,8 @@ soup = BeautifulSoup(r.text, "html.parser")
     #print(link)
 
 for tag in soup.find_all(href=re.compile("^https://derechadiario.com.ar/latinoamerica/latinoamerica_chile")):
-    if 'wikipedia' in tag['href']:
-        continue
-    else:
-        print(tag['href'])
+    print(tag['href'])
+    x = requests.get(tag['href'])
+    soup2 = BeautifulSoup(x.text, "html.parser")
+    for para in soup2.find_all("p"):
+        print(para.get_text())
